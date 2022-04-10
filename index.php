@@ -61,94 +61,8 @@ include("./layout/header.php")
             <ul class="search_tabs__list">
                 <li class="search_tabs__item"><a href="#tabs-1"><i class="fas fa-hotel"></i><span>Hotels</span></a>
                 </li>
-                <li class="search_tabs__item"><a href="#tabs-2"><i class="fas fa-car"></i><span>Car Rental</span></a>
-                </li>
-                <li class="search_tabs__item"><a href="#tabs-3"><i class="fas fa-plane"></i><span>Flights</span></a>
-                </li>
-                <li class="search_tabs__item"><a href="#tabs-4"><i class="fas fa-umbrella-beach"></i><span>Trips</span></a>
-                </li>
-                <li class="search_tabs__item"><a href="#tabs-5"><i class="fas fa-ship"></i><span>Cruises</span></a>
-                </li>
-                <!-- <li class="search_tabs__item"><a href="#tabs-6"><i class="fas fa-hiking"></i><span>Hoạt động</span></a>
-                    </li> -->
             </ul>
             <div id="tabs-1" class="tabs_content animated fadeIn">
-                <form action="" class="search_content">
-                    <div class="search_content__item">
-                        <div>Places to go</div>
-                        <select name="adults" class="search_content__input">
-                            <option>Hà Nội</option>
-                            <option>Đà Nẵng</option>
-                            <option>TP.Hồ Chí Minh</option>
-                        </select>
-                    </div>
-                    <div class="search_content__item">
-                        <div>Check-in</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
-                    </div>
-                    <div class="search_content__item">
-                        <div>Check-out</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
-                    </div>
-                    <div class="search_content__item">
-                        <div>Guest</div>
-                        <select name="adults" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                    <div class="search_content__item">
-                        <div>Rooms</div>
-                        <select name="children" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                    <button class="button search_content__button">Search<span></span><span></span><span></span>
-                    </button>
-                </form>
-            </div>
-            <div id="tabs-2" class="tabs_content animated fadeIn">
-                <form action="" class="search_content">
-                    <div class="search_content__item">
-                        <div>Places to go</div>
-                        <select name="adults" class="search_content__input">
-                            <option>Hà Nội</option>
-                            <option>Đà Nẵng</option>
-                            <option>TP.Hồ Chí Minh</option>
-                        </select>
-                    </div>
-                    <div class="search_content__item">
-                        <div>Check-in</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
-                    </div>
-                    <div class="search_content__item">
-                        <div>Check-out</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
-                    </div>
-                    <div class="search_content__item">
-                        <div>Guest</div>
-                        <select name="adults" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                    <div class="search_content__item">
-                        <div>Rooms</div>
-                        <select name="children" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                    <button class="button search_content__button">Search<span></span><span></span><span></span>
-                    </button>
-                </form>
-            </div>
-            <div id="tabs-3" class="tabs_content animated fadeIn">
                 <form action="" class="search_content">
                     <div class="search_content__item">
                         <div>Places to go</div>
@@ -194,69 +108,46 @@ include("./layout/header.php")
         <p>Here are our best tours right now.</p>
         <p>You will be satisfied when you sign up for the tours below.</p>
         <div class="main_intro__items">
-            <div class="intro_item">
-                <div class="intro_item__backgroud" style="background-image: url(styles/images/intro_1.jpg)"></div>
-                <div class="intro_item__content">
-                    <div class="intro_date">from 15/04 - 15/05</div>
-                    <div class="intro_text">
-                        <h1>Bana Hill</h1>
-                        <div class="intro_price">Price: 1,200,000đ</div>
-                        <div class="rating rating_4">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="button intro_button">
-                        <div class="button_bcg"></div>
-                        <a href="tours.html">Check Now<span></span><span></span><span></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="intro_item">
-                <div class="intro_item__backgroud" style="background-image: url(styles/images/intro_2.jpg)"></div>
-                <div class="intro_item__content">
-                    <div class="intro_date">from 15/04 - 15/05</div>
-                    <div class="intro_text">
-                        <h1>Hội An</h1>
-                        <div class="intro_price">Price: 1,200,000đ</div>
-                        <div class="rating rating_4">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="button intro_button">
-                        <div class="button_bcg"></div>
-                        <a href="#">Check Now<span></span><span></span><span></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="intro_item">
-                <div class="intro_item__backgroud" style="background-image: url(styles/images/intro_1.jpg)"></div>
-                <div class="intro_item__content">
-                    <div class="intro_date">from 15/04 - 15/05</div>
-                    <div class="intro_text">
-                        <h1>Bana Hill</h1>
-                        <div class="intro_price">Price: 1,200,000đ</div>
-                        <div class="rating rating_4">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="button intro_button">
-                        <div class="button_bcg"></div>
-                        <a href="#">Check Now<span></span><span></span><span></span></a>
-                    </div>
-                </div>
-            </div>
+
+            <?php
+            include("./connect.php");
+            function currency_format($number)
+            {
+                if (!empty($number)) {
+                    return number_format($number, 0, ',', '.') . 'đ';
+                }
+            }
+            $query = "select * from tours limit 3";
+            $result = $con->query($query);
+            $html = "";
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    $money = currency_format($row['Price']);
+                    echo " <div class='intro_item'>
+                            <div class='intro_item__backgroud' style='background-image: url(styles/images/intro_1.jpg)'></div>
+                            <div class='intro_item__content'>
+                                <div class='intro_date'>from $row[StartDate] - $row[EndDate]</div>
+                                <div class='intro_text'>
+                                    <h1>$row[Address]</h1>
+                                    <div class='intro_price'>$money</div>
+                                    <div class='rating rating_$row[Rate]'>
+                                        <i class='fas fa-star'></i>
+                                        <i class='fas fa-star'></i>
+                                        <i class='fas fa-star'></i>
+                                        <i class='fas fa-star'></i>
+                                        <i class='fas fa-star'></i>
+                                    </div>
+                                </div>
+                                <div class='button intro_button'>
+                                    <div class='button_bcg'></div>
+                                    <a href='detailTours.php?id=$row[Id] '>Check Now<span></span><span></span><span></span></a>
+                                </div>
+                            </div>
+                        </div>";
+                }
+            }
+            ?>
         </div>
     </div>
     <!--        CTA-->
@@ -276,7 +167,6 @@ include("./layout/header.php")
                 </div>
             </div>
         </div>
-
     </div>
     <!--        Offers-->
     <div class="main_offers">
@@ -284,21 +174,23 @@ include("./layout/header.php")
             <h2 class="offers_title">The best deals</h2>
             <div class="offers_items">
                 <?php
-                    include("./connect.php");
-                    $query = "select * from tours";
-                    $result = $con->query($query);
-                    $html="";
-                    if ($result->num_rows > 0) {
-                        // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                            echo "<div class='offers_item'>
+                include("./connect.php");
+                $query = "select * from tours limit 4";
+                $result = $con->query($query);
+                $html = "";
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $money2 = currency_format($row['Price']);
+
+                        echo "<div class='offers_item'>
                             <div class='offers_image'>
-                                <div class='offers_image_background' style='background-image: url(styles/images/offers_1.jpg)'></div>
-                                <div class='offers_name'><a href='#'>Tour Tây Bắc</a></div>
+                                <div class='offers_image_background' style='background-image: url(./admin/upload/$row[Image]'></div>
+                                <div class='offers_name'><a href='#'>Tour $row[Address]</a></div>
                             </div>
                             <div class='offers_content'>
-                                <div class='offers_price'>$row[Price]đ</div>
-                                <div class='rating rating_4 offers_rating'>
+                                <div class='offers_price'>$money2</div>
+                                <div class='rating rating_$row[Rate] offers_rating'>
                                     <i class='fas fa-star'></i>
                                     <i class='fas fa-star'></i>
                                     <i class='fas fa-star'></i>
@@ -314,17 +206,15 @@ include("./layout/header.php")
                                         <li class='offers_icons_item'><img src='styles/images/sailboat.png' alt=''></li>
                                     </ul>
                                 </div>
-                                <div class='offers_link'><a href='offers.html'>More</a></div>
+                                <div class='offers_link'><a href='offers.php'>More</a></div>
                             </div>
                           </div>";
-                           
-
-                        }
-                      } 
+                    }
+                }
 
                 ?>
-              
-              
+
+
             </div>
         </div>
     </div>

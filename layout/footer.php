@@ -75,3 +75,4 @@
             </div>
         </div>
     </footer>
+    <button onclick="topFunction()" id="back_top" title="Go to top"><i class="fas fa-rocket"></i></button>

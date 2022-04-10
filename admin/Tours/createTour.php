@@ -14,7 +14,7 @@ include("../layout/header.php")
             <form method="POST"  enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name">Tour Name</label>
-                    <input type="text" class="form-control" name="Name" id="Name" placeholder="TourName">
+                    <input required type="text" class="form-control" name="Name" id="Name" placeholder="TourName">
                 </div>
                 <div class="form-group">
                     <label for="Image">Image</label>
@@ -26,24 +26,28 @@ include("../layout/header.php")
                 </div>
                 <div class="form-group">
                     <label for="Price">Price</label>
-                    <input type="number" class="form-control" name="Price" id="Price" placeholder="Price">
+                    <input required type="number" class="form-control" name="Price" id="Price" placeholder="Price">
                 </div>
 
                 <div class="form-group">
                     <label for="Address">Address</label>
-                    <input type="text" class="form-control" name="Address" id="Address" placeholder="Enter your Address of Tour">
+                    <input required type="text" class="form-control" name="Address" id="Address" placeholder="Enter your Address of Tour">
                 </div>
                 <div class="form-group">
                     <label for="SortTitle">SortTitle</label>
-                    <input type="text" class="form-control" name="SortTitle" id="SortTitle" placeholder="Title">
+                    <input required type="text" class="form-control" name="SortTitle" id="SortTitle" placeholder="Title">
                 </div>
                 <div class="form-group">
                     <label for="StartDate">Start Date</label>
-                    <input type="Date" class="form-control" name="StartDate" id="StartDate">
+                    <input required type="Date" class="form-control" name="StartDate" id="StartDate">
                 </div>
                 <div class="form-group">
                     <label for="EndDate">End Date</label>
-                    <input type="Date" class="form-control" name="EndDate" id="EndDate">
+                    <input required type="Date" class="form-control" name="EndDate" id="EndDate">
+                </div>
+                <div class="form-group">
+                    <label for="Rate">Rate</label>
+                    <input type="number" min="0" max="5" class="form-control" name="Rate" id="Rate">
                 </div>
                 <button name="createTour" type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -65,6 +69,7 @@ if (isset($_POST["createTour"])) {
     $SortTitle = $_POST["SortTitle"];
     $StartDate = $_POST["StartDate"];
     $EndDate = $_POST["EndDate"];
+    $Rate = $_POST["Rate"];
 
 
     $output_dir = "../upload/";/* Path for file upload */
@@ -86,11 +91,13 @@ if (isset($_POST["createTour"])) {
 
     move_uploaded_file($_FILES["Image"]["tmp_name"][0],$output_dir."/".$NewImageName );
     if(isset($NewImageName)){
-        $sql = "INSERT INTO `tours`( `Name`, `Description`, `Image`, `Price`, `StartDate`, `EndDate`, `Address`, `SortTitle`) 
-        VALUES ('$Name','$Description','$NewImageName','$Price','$StartDate','$EndDate', '$Address', '$SortTitle')";
+        $sql = "INSERT INTO `tours`( `Name`, `Description`, `Image`, `Price`, `StartDate`, `EndDate`, `Address`, `SortTitle`,`Rate`) 
+        VALUES ('$Name','$Description','$NewImageName','$Price','$StartDate','$EndDate', '$Address', '$SortTitle','$Rate')";
        
         if ($con->query($sql) === TRUE) {
             echo "New Tour created successfully";
+            echo "<script>window.open('../index.php','_self')</script>";
+            
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
         }

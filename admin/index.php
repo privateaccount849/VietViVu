@@ -16,8 +16,6 @@ include("./layout/header.php")
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <a href="./Tours/createTour.php" class="btn btn-primary">Create</a>
-
-
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
@@ -33,6 +31,7 @@ include("./layout/header.php")
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 40.3125px;">Price</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 91.6px;">Start Date</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;">End Date</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;">Rate</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;">Action</th>
                                     </tr>
                                 </thead>
@@ -68,13 +67,14 @@ include("./layout/header.php")
                                             <td><?php echo currency_format($results->data[$i]['Price']); ?></td>
                                             <td><?php echo $results->data[$i]['StartDate']; ?></td>
                                             <td><?php echo $results->data[$i]['EndDate']; ?></td>
+                                            <td><?php echo $results->data[$i]['Rate']; ?></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Menu
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Update</a>
+                                                        <a class="dropdown-item" href="Tours/updateTour.php?id=<?php echo $results->data[$i]['Id']; ?>">Update</a>
                                                         <a class="dropdown-item" href="index.php?delete=<?php echo $results->data[$i]['Id']; ?>">Delete</a>
                                                     </div>
                                                 </div>
@@ -84,9 +84,9 @@ include("./layout/header.php")
                                                 $TourId = $_GET['delete'];
                                                 $sql = "delete from tours where Id=$TourId";
                                                 $result = mysqli_query($con, $sql);
-                                            
+
                                                 if ($result) {
-                                                    echo "<script>alert('Song has been deleted successful!')</script>";
+                                                    echo "<script>alert('Tour has been deleted successful!')</script>";
                                                     echo "<script>window.open('index.php','_self')</script>";
                                                 } else {
                                                     echo "<script>alert('Error')</script>";
