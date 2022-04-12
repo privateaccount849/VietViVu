@@ -3,13 +3,17 @@ require_once("./connect.php");
 include("./layout/header.php");
 if (isset($_GET["id"])) {
     $result = $con->query("SELECT * FROM `tours` WHERE Id = $_GET[id]");
-
     while ($row = mysqli_fetch_array($result)) {
         $Image =  $row['Image'];
         $Name =  $row['Name'];
         $SortTitle =  $row['SortTitle'];
         $Description =  $row['Description'];
+        $View = $row['View'];
+        
     }
+    $View +=1;
+    $con->query("UPDATE `tours` SET `View`='$View' WHERE Id =$_GET[id]");
+
 }
 
 
@@ -38,8 +42,7 @@ if (isset($_GET["id"])) {
                 <p class="about__text"><?php echo $SortTitle ?></p>
                 <div class="button button_about">
                     <div class="button_bcg"></div>
-                    <a data-toggle="modal" data-target="#exampleModal" href="#">Order Now !
-                        <span></span><span></span><span></span></a>
+                    <a href="checkOut.php?id=<?php echo $_GET["id"]?>">Order Now!<span></span><span></span><span></span></a>
                 </div>
             </div>
         </div>

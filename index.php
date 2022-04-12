@@ -141,7 +141,7 @@ include("./layout/header.php")
                                 </div>
                                 <div class='button intro_button'>
                                     <div class='button_bcg'></div>
-                                    <a href='detailTours.php?id=$row[Id] '>Check Now<span></span><span></span><span></span></a>
+                                    <a href='detailTours.php?id=$row[Id]'>Check Now<span></span><span></span><span></span></a>
                                 </div>
                             </div>
                         </div>";
