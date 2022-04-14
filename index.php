@@ -114,7 +114,7 @@ include("./layout/header.php")
             function currency_format($number)
             {
                 if (!empty($number)) {
-                    return number_format($number, 0, ',', '.') . 'đ';
+                    return number_format($number, 0, ',', '.') . '$';
                 }
             }
             $query = "select * from tours limit 3";

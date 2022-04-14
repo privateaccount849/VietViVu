@@ -25,7 +25,7 @@ if (isset($_GET["id"])) {
             <div class="home_slide__background" style="background-image: url(styles/images/about_slide.jpg)"></div>
             <div class="home__content">
                 <div class="home__title animated bounceInDown">
-                Processing to Payment
+                    Processing to Payment
                 </div>
             </div>
         </div>
@@ -102,16 +102,13 @@ if (isset($_GET["id"])) {
                                         <label for="phone-number" class="custom-label">Phone Number</label>
                                         <input type="number" id="phone-number" class="form-control custom-input" placeholder="0988410926">
                                     </div>
-                               
-
-                                    <!--Grid row-->
                                     <div class="row">
                                         <!--Grid column-->
                                         <div class="col-lg-4 col-md-12 mb-4">
                                             <label for="country" class="custom-label">Adults</label>
                                             <input type="number" class="form-control custom-input" id="Adults" placeholder="0" required>
 
-                                            
+
 
                                         </div>
                                         <!--Grid column-->
@@ -135,7 +132,21 @@ if (isset($_GET["id"])) {
                                         </div>
                                         <!--Grid column-->
                                     </div>
-                                    <!--Grid row-->
+                                   
+                                    <?php
+                                    $result2 = $con->query("SELECT * FROM `hotels` left join tourhotels on hotels.IdHotel = tourhotels.HotelId left join tours on tourhotels.TourId = tours.Id where tourId=$_GET[id]");
+                                    ?>
+                                    <div class="md-form mb-12">
+                                        <label for="phone-number" class="custom-label">Hotel of The Tour</label>
+                                        <select style="height: 33px; margin: bottom 15px;" class="form-control custom-input">
+                                            <option selected>Choose a Hotel</option>
+                                            <?php
+                                            while ($row2 = mysqli_fetch_array($result2)) {
+                                                echo "<option value='$row2[Id]'>$row2[HotelName]</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                     <hr>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="same-address">
@@ -288,21 +299,21 @@ include("./layout/footer.php");
 
 
 
-    $("#Adults").on("input",(e)=>{
-        $("#briefAdults").text("x"+(e.target.value));
-        $("#priceAdults").text("$"+(e.target.value*<?php echo $Price ?>));
+    $("#Adults").on("input", (e) => {
+        $("#briefAdults").text("x" + (e.target.value));
+        $("#priceAdults").text("$" + (e.target.value * <?php echo $Price ?>));
 
     })
 
-    $("#Kids").on("input",(e)=>{
-        $("#briefKids").text("x"+(e.target.value))
-        $("#priceKids").text("$"+(e.target.value*<?php echo $Price ?>));
+    $("#Kids").on("input", (e) => {
+        $("#briefKids").text("x" + (e.target.value))
+        $("#priceKids").text("$" + (e.target.value * <?php echo $Price ?>));
 
     })
 
-    $("#Baby").on("input",(e)=>{
-        $("#briefBaby").text("x"+(e.target.value))
-        $("#priceBaby").text("$"+(e.target.value*<?php echo $Price ?>));
+    $("#Baby").on("input", (e) => {
+        $("#briefBaby").text("x" + (e.target.value))
+        $("#priceBaby").text("$" + (e.target.value * <?php echo $Price ?>));
 
     })
 </script>

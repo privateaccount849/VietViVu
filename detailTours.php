@@ -42,7 +42,7 @@ if (isset($_GET["id"])) {
                 <p class="about__text"><?php echo $SortTitle ?></p>
                 <div class="button button_about">
                     <div class="button_bcg"></div>
-                    <a href="checkOut.php?id=<?php echo $_GET["id"]?>">Order Now!<span></span><span></span><span></span></a>
+                    <a href="service.php?id=<?php echo $_GET["id"]?>">Order Now!<span></span><span></span><span></span></a>
                 </div>
             </div>
         </div>

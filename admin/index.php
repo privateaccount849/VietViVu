@@ -51,10 +51,10 @@ include("./layout/header.php")
                                     $Paginator  = new Paginator($con, $query);
 
                                     $results    = $Paginator->getData($limit, $page);
-                                    function currency_format($number, $suffix = 'đ')
+                                    function currency_format($number, $suffix = 'USD')
                                     {
                                         if (!empty($number)) {
-                                            return number_format($number, 0, ',', '.') . "{$suffix}";
+                                            return number_format($number, 0, ',', '.') . "$";
                                         }
                                     }
                                     ?>
@@ -75,6 +75,7 @@ include("./layout/header.php")
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                         <a class="dropdown-item" href="Tours/updateTour.php?id=<?php echo $results->data[$i]['Id']; ?>">Update</a>
+                                                        <a class="dropdown-item" href="Tours/updateTourHotels.php?id=<?php echo $results->data[$i]['Id']; ?>">Update Hotels</a>
                                                         <a class="dropdown-item" href="index.php?delete=<?php echo $results->data[$i]['Id']; ?>">Delete</a>
                                                     </div>
                                                 </div>

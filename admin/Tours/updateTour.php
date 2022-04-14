@@ -33,8 +33,8 @@ if (isset($_GET["id"])) {
                        </div>
        
                        <div class='form-group'>
-                           <label for='Address'>Address</label>
-                           <input value='$row[Address]' type='text' class='form-control' name='Address' id='Address' placeholder='Enter your Address of Tour'>
+                           <label for='Address'>Place To Go</label>
+                           <input value='$row[Address]' type='text' class='form-control' name='Address' id='Address' placeholder='Enter your Place To Go'>
                        </div>
                        <div class='form-group'>
                            <label for='SortTitle'>SortTitle</label>
