@@ -3,7 +3,7 @@ include("../layout/header.php");
 require_once("../../connect.php");
 
 if (isset($_GET["id"])) {
-    $result = $con->query("SELECT * FROM `hotels` WHERE Id = $_GET[id]");
+    $result = $con->query("SELECT * FROM `hotels` WHERE IdHotel = $_GET[id]");
     while ($row = mysqli_fetch_array($result)) {
         if ($row['type'] == 0) {
             $typee = '<option selected value=0>Single bed room</option><option value=1>Twin bed room</option>';
@@ -36,14 +36,27 @@ if (isset($_GET["id"])) {
                            <label for='Price'>Price</label>
                            <input value='$row[HotelPrice]' type='number' class='form-control' name='Price' id='Price' placeholder='Price'>
                        </div>
+                       
+
                        <div class='form-group'>
-                       <select class='form-control form-control-sm' name='type'>
-                       $typee
-                     </select>
+                       <label for='Rate'>Rate</label>
+                       <input value=' $row[HotelRate]' type='number' class='form-control' name='Rate' id='Rate' placeholder='Hotel Rate'>
+                   </div>
+                   <div class='form-group'>
+                       <label for='Address'>Address</label>
+                       <input value=' $row[HotelAddress]' type='text' class='form-control' name='Address' id='Address' placeholder='Hotel Address'>
+                   </div>
+                   <div class='form-group'>
+                           <label for='SortTile'>Title</label>
+                           <input value=' $row[HotelSortTitle]' type='text' class='form-control' name='SortTile' id='SortTile' placeholder='Hotel Tile'>
                        </div>
-       
                        
-                       
+                       <div class='form-group'>
+                       <label for='SortTile'>Type Room</label>
+                       <select class='form-control form-control-sm' name='type' >
+                       $typee
+                       </select>
+                       </div>
                        <button name='updateTour' type='submit' class='btn btn-primary'>Update</button>
                    </form>
                </div>
@@ -94,7 +107,7 @@ if (isset($_POST["updateTour"])) {
     } else {
         $sql = "UPDATE `hotels` SET `HotelName`='$Name',`HotelDescription`='$Description',
         `HotelPrice`='$Price',`type`='$type'
-        WHERE Id = $_GET[id]";
+        WHERE IdHotel = $_GET[id]";
         if ($con->query($sql) === TRUE) {
             echo "<script>alert('Hotel has been Update successful!')</script>";
             echo "<script>window.open('../hotels.php','_self')</script>";

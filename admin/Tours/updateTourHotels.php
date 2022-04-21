@@ -3,9 +3,7 @@ include("../layout/header.php");
 require_once("../../connect.php");
 
 $result = $con->query("SELECT * FROM `hotels` left join tourhotels on hotels.IdHotel = tourhotels.HotelId left join tours on tourhotels.TourId = tours.Id");
-
 ?>
-
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -35,8 +33,6 @@ $result = $con->query("SELECT * FROM `hotels` left join tourhotels on hotels.IdH
                               </div>
                               ";
                             }
-                            
-                           
                         }
                         ?>
                 </div>
@@ -44,9 +40,7 @@ $result = $con->query("SELECT * FROM `hotels` left join tourhotels on hotels.IdH
             </form>
         </div>
     </div>
-
 </div>
-
 
 <?php
 
@@ -66,14 +60,10 @@ if (isset($_POST["update"])) {
             echo "<script>alert('Tour has been Update successful!')</script>";
             echo "<script>window.open('../index.php','_self')</script>";
     }
-  
-    
 }
 
 ?>
-
 <!-- /.container-fluid -->
-
 </div>
 <!-- End of Main Content -->
 <?php

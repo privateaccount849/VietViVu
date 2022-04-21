@@ -50,6 +50,10 @@
 </head>
 
 <body>
+<?php
+    // // Start the session
+    session_start();
+    ?>
     <div id="wrapper">
         <!-- Header -->
         <header class="header">
@@ -81,6 +85,11 @@
                         <li class="main_nav__item"><a href="offers.html">OFFERS</a></li>
                         <li class="main_nav__item"><a href="blog.html">NEWS</a></li>
                         <li class="main_nav__item"><a href="contact.html">CONTACT</a></li>
+                        <?php 
+                        if (isset($_SESSION['RoleName'])) {
+                            echo '<li class="main_nav__item"><a href="admin">Admin</a></li>';
+                        } 
+                        ?>
                     </ul>
                 </div>
                 <div class="main_nav__search">

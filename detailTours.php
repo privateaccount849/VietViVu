@@ -13,7 +13,6 @@ if (isset($_GET["id"])) {
     }
     $View +=1;
     $con->query("UPDATE `tours` SET `View`='$View' WHERE Id =$_GET[id]");
-
 }
 
 

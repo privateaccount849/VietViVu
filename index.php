@@ -1,49 +1,39 @@
 <?php
 include("./layout/header.php")
+
 ?>
 
 <div class="main">
     <!--slider-->
     <div class="main__slide">
-        <div class="home_slide__item">
-            <div class="home_slide__background" style="background-image: url(styles/images/bana-slide.jpg)"></div>
-            <div class="home_slider__content">
-                <div class="home_slider_content_inner animated bounceInLeft">
-                    <h1>tour</h1>
-                    <h1>Bana Hill</h1>
-                    <div class="button home_slider__button">
-                        <div class="button_bcg"></div>
-                        <a href="#">Check Now<span></span><span></span><span></span></a>
+    <?php
+            include("./connect.php");
+            
+            $query = "select * from tours limit 3";
+            $result = $con->query($query);
+            $html = "";
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {             
+                    $money = currency_format($row['Price']);
+                    echo "<div class='home_slide__item'>
+                    <div class='home_slide__background' style='background-image: url(./admin/upload/$row[Image]'></div>
+                    <div class='home_slider__content'>
+                        <div class='home_slider_content_inner animated bounceInDown'>
+                            <h1>tour</h1>
+                            <h1>$row[Address]</h1>
+                            <div class='button home_slider__button'>
+                                <div class='button_bcg'></div>
+                                <a href='detailTours.php?id=$row[Id]'>Check Now<span></span><span></span><span></span></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="home_slide__item">
-            <div class="home_slide__background" style="background-image: url(styles/images/hoian-slide.jpg)"></div>
-            <div class="home_slider__content">
-                <div class="home_slider_content_inner animated bounceInRight">
-                    <h1>tour</h1>
-                    <h1>Hội An</h1>
-                    <div class="button home_slider__button">
-                        <div class="button_bcg"></div>
-                        <a href="#">Check Now<span></span><span></span><span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="home_slide__item">
-            <div class="home_slide__background" style="background-image: url(styles/images/phuquoc_slide.jpg)"></div>
-            <div class="home_slider__content">
-                <div class="home_slider_content_inner animated bounceInDown">
-                    <h1>tour</h1>
-                    <h1>Phú Quốc</h1>
-                    <div class="button home_slider__button">
-                        <div class="button_bcg"></div>
-                        <a href="#">Check Now<span></span><span></span><span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                     ";
+                }
+            }
+            ?>
+        
         <div class="main_slide__nav nav__prev"><i onclick="plusSlides(-1)" class="fas fa-chevron-circle-left"></i>
         </div>
         <div class="main_slide__nav nav__next"><i onclick="plusSlides(1)" class="fas fa-chevron-circle-right"></i></i>
@@ -63,10 +53,10 @@ include("./layout/header.php")
                 </li>
             </ul>
             <div id="tabs-1" class="tabs_content animated fadeIn">
-                <form action="" class="search_content">
+                <form action="offers.php" method="GET" class="search_content">
                     <div class="search_content__item">
                         <div>Places to go</div>
-                        <select name="adults" class="search_content__input">
+                        <select name="Address" class="search_content__input">
                             <option>Hà Nội</option>
                             <option>Đà Nẵng</option>
                             <option>TP.Hồ Chí Minh</option>
@@ -74,26 +64,18 @@ include("./layout/header.php")
                     </div>
                     <div class="search_content__item">
                         <div>Check-in</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
+                        <input type="date" name="StartDate" type="text" class="search_content__input" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="search_content__item">
                         <div>Check-out</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
+                        <input type="date" name="EndDate" type="text" class="search_content__input" placeholder="YYYY-MM-DD">
                     </div>
-                    <div class="search_content__item">
-                        <div>Guest</div>
-                        <select name="adults" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
+                   
                     <div class="search_content__item">
                         <div>Rooms</div>
-                        <select name="children" class="search_content__input">
+                        <select name="type" class="search_content__input">
                             <option>01</option>
                             <option>02</option>
-                            <option>03</option>
                         </select>
                     </div>
                     <button class="button search_content__button">Search<span></span><span></span><span></span>
@@ -122,10 +104,10 @@ include("./layout/header.php")
             $html = "";
             if ($result->num_rows > 0) {
                 // output data of each row
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {             
                     $money = currency_format($row['Price']);
                     echo " <div class='intro_item'>
-                            <div class='intro_item__backgroud' style='background-image: url(styles/images/intro_1.jpg)'></div>
+                            <div class='intro_item__backgroud' style='background-image: url(./admin/upload/$row[Image]'></div>
                             <div class='intro_item__content'>
                                 <div class='intro_date'>from $row[StartDate] - $row[EndDate]</div>
                                 <div class='intro_text'>
@@ -288,86 +270,33 @@ include("./layout/header.php")
         <div class="box main_hotel__box">
             <h2 class="main_hotel_title">MOST FAVORITE HOTEL</h2>
             <div class="hotel_items">
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_1.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Green Plaza Hotel</a></div>
-                        <div class="hotel_price">1,000,000đ</div>
-                        <div class="hotel_location">Hải Châu, Đà Nẵng</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_2.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Hilton Đà Nẵng</a></div>
-                        <div class="hotel_price">3,000,000đ</div>
-                        <div class="hotel_location">Hải Châu, Đà Nẵng</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_3.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Hanoi Hotel</a></div>
-                        <div class="hotel_price">1,900,00đ</div>
-                        <div class="hotel_location">Hà Nội</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_4.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Sofitel Sài Gòn</a></div>
-                        <div class="hotel_price">4,100,000đ</div>
-                        <div class="hotel_location">Quận 1, HCM</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_1.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Green Plaza Hotel</a></div>
-                        <div class="hotel_price">1,000,000đ</div>
-                        <div class="hotel_location">Hải Châu, Đà Nẵng</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_2.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Hilton Đà Nẵng</a></div>
-                        <div class="hotel_price">3,000,000đ</div>
-                        <div class="hotel_location">Hải Châu, Đà Nẵng</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_3.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Hanoi Hotel</a></div>
-                        <div class="hotel_price">1,900,00đ</div>
-                        <div class="hotel_location">Hà Nội</div>
-                    </div>
-                </div>
-                <div class="hotel_item">
-                    <div class="hotel_image">
-                        <img src="styles/images/hotel_4.jpg" alt="">
-                    </div>
-                    <div class="hotel_content">
-                        <div class="hotel_title"><a href="#">Sofitel Sài Gòn</a></div>
-                        <div class="hotel_price">4,100,000đ</div>
-                        <div class="hotel_location">Quận 1, HCM</div>
-                    </div>
-                </div>
+            <?php
+                include("./connect.php");
+                $query = "select * from hotels limit 8";
+                $result = $con->query($query);
+                $html = "";
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $money2 = currency_format($row['HotelPrice']);
+
+                        echo "<div class='hotel_item'>
+                        <div class='hotel_image'>
+                            <img src='./admin/upload/$row[HotelImage]' alt='''>
+                        </div>
+                        <div class='hotel_content'>
+                            <div class='hotel_title'><a href='#'>$row[HotelName]</a></div>
+                            <div class='hotel_price'>$row[HotelPrice]</div>
+                            <div class='hotel_location'>$row[HotelAddress]</div>
+                        </div>
+                    </div>";
+                    }
+                }
+
+                ?>
+
+                
+                
             </div>
         </div>
     </div>

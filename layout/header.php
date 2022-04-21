@@ -65,7 +65,9 @@
                     </ul>
                 </div>
                 <div class="main_nav__search">
-                    <form action=""><input class="input_search" type="text"></form>
+                    <form action="offers.php" method="GET">
+                        <input name="Address" class="input_search" type="text">
+                    </form>
                     <div class="search__item"><i class="fas fa-search"></i></div>
                 </div>
             </div>

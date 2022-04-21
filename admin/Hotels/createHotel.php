@@ -25,8 +25,20 @@ include("../layout/header.php")
                     <textarea class='form-control' name='Description' id='Description' placeholder='Description'></textarea>
                 </div>
                 <div class='form-group'>
+                    <label for='Address'>Address</label>
+                    <input type='text' class='form-control' name='Address' id='Address' placeholder='Address'>
+                </div>
+                <div class='form-group'>
                     <label for='Price'>Price</label>
                     <input type='number' class='form-control' name='Price' id='Price' placeholder='Price'>
+                </div>
+                <div class='form-group'>
+                    <label for='SortTitle'>SortTitle</label>
+                    <input type='text' class='form-control' name='SortTitle' id='SortTitle' placeholder='SortTitle'>
+                </div>
+                <div class='form-group'>
+                    <label for='Rate'>Rate</label>
+                    <input type='number' min="0" max="5" class='form-control' name='Rate' id='Rate' placeholder='Rate'>
                 </div>
                 <div class='form-group'>
                     <select class='form-control form-control-sm' name='type'>
@@ -51,7 +63,10 @@ if (isset($_POST["createHotel"])) {
     $Name = $_POST["Name"];
     $Description = $_POST["Description"];
     $Price = $_POST["Price"];
+    $Address = $_POST["Address"];
     $type = $_POST["type"];
+    $Rate = $_POST["Rate"];
+    $Title = $_POST["SortTitle"];
 
     $output_dir = "../upload/";/* Path for file upload */
     $RandomNum   = time();
@@ -71,8 +86,8 @@ if (isset($_POST["createHotel"])) {
 
     move_uploaded_file($_FILES["Image"]["tmp_name"][0], $output_dir . "/" . $NewImageName);
     if (isset($NewImageName)) {
-        $sql = "INSERT INTO `hotels`(`HotelName`, `HotelDescription`, `HotelPrice`, `HotelImage`, `type`) 
-        VALUES ('$Name','$Description','$Price','$NewImageName','$type')";
+        $sql = "INSERT INTO `hotels`(`HotelName`, `HotelDescription`, `HotelPrice`, `HotelImage`, `type`, `HotelRate`, `HotelSortTitle`, `HotelAddress`) 
+        VALUES ('$Name','$Description','$Price','$NewImageName','$type', '$Rate', '$Title', '$Address')";
 
         if ($con->query($sql) === TRUE) {
             echo "New Tour created successfully";

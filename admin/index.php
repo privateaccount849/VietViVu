@@ -63,7 +63,7 @@ include("./layout/header.php")
                                     <?php for ($i = 0; $i < count($results->data); $i++) : ?>
                                         <tr>
                                             <td><?php echo $results->data[$i]['Name']; ?></td>
-                                            <td><img style="height: 80px;" src="./upload/<?php echo $results->data[$i]['Image']; ?>" alt=""></td>
+                                            <td><img style="height: 80px; with: 80px;" src="./upload/<?php echo $results->data[$i]['Image']; ?>" alt=""></td>
                                             <td><?php echo currency_format($results->data[$i]['Price']); ?></td>
                                             <td><?php echo $results->data[$i]['StartDate']; ?></td>
                                             <td><?php echo $results->data[$i]['EndDate']; ?></td>

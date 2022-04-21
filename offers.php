@@ -7,7 +7,7 @@ include("./layout/header.php")
             <div class="home_slide__background" style="background-image: url(styles/images/offers_slide.jpg)"></div>
             <div class="home__content">
                 <div class="home__title animated bounceInLeft">
-                    Voucher
+                    Offers
                 </div>
             </div>
         </div>
@@ -20,109 +20,67 @@ include("./layout/header.php")
                 </li>
             </ul>
             <div id="tabs-1" class="tabs_content animated fadeIn">
-                <form action="" class="search_content">
+                <form action="offers.php" method="GET" class="search_content">
                     <div class="search_content__item">
                         <div>Places to go</div>
-                        <select name="adults" class="search_content__input">
-                            <option>Hà Nội</option>
-                            <option>Đà Nẵng</option>
-                            <option>TP.Hồ Chí Minh</option>
+                        <select name="Address" class="search_content__input">
+                            <?php
+                            include("./connect.php");
+                            $result2 = $con->query("SELECT Address FROM `tours` GROUP by Address");
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                                echo "<option>$row2[Address]</option>";
+                            }
+                           
+                            ?>
                         </select>
                     </div>
                     <div class="search_content__item">
                         <div>Check-in</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
+                        <input type="date" value="<?php echo date("Y-m-d"); ?>" name="StartDate" type="text" class="search_content__input" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="search_content__item">
                         <div>Check-out</div>
-                        <input type="text" class="search_content__input" placeholder="YYYY-MM-DD">
+                        <input type="date" name="EndDate" type="text" class="search_content__input" placeholder="YYYY-MM-DD">
                     </div>
+                   
                     <div class="search_content__item">
-                        <div>Guest</div>
-                        <select name="adults" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
+                        <div>Rate</div>
+                        <select name="type" class="search_content__input">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
                         </select>
                     </div>
-                    <div class="search_content__item">
-                        <div>Rooms</div>
-                        <select name="children" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                        </select>
-                    </div>
-                    <button class="button search_content__button">Search<span></span><span></span><span></span>
+                    <button name="searchTour" class="button search_content__button">Search<span></span><span></span><span></span>
                     </button>
                 </form>
             </div>
         </div>
     </div>
     <div class="offers">
-        <div class="box offers__box1">
-            <div class="offers_sorting_container">
-                <ul class="offers_sorting">
-                    <li id="offer_1">
-                        <span class="sorting_text">Giá</span>
-                        <i class="fas fa-angle-down"></i>
-                        <ul id="offer_box_1" class="animated fadeInUp">
-                            <li class="sort_btn"><span>Hiện tất cả</span></li>
-                            <li class="sort_btn"><span>Tăng dần</span></li>
-                            <li class="sort_btn"><span>Giảm dần</span></li>
-                        </ul>
-                    </li>
-                    <li id="offer_2">
-                        <span class="sorting_text">Thứ tự</span>
-                        <i class="fas fa-angle-down"></i>
-                        <ul id="offer_box_2">
-                            <li class="sort_btn"><span>Mặc định</span></li>
-                            <li class="sort_btn"><span>Bảng chữ cái</span></li>
-                        </ul>
-                    </li>
-                    <li id="offer_3">
-                        <span class="sorting_text">Sao</span>
-                        <i class="fas fa-angle-down"></i>
-                        <ul id="offer_box_3">
-                            <li class="filter_btn" data-filter="*"><span>Hiện tất cả</span></li>
-                            <li class="sort_btn"><span>Giảm dần</span></li>
-                            <li class="filter_btn" data-filter=".rating_3"><span>3</span></li>
-                            <li class="filter_btn" data-filter=".rating_4"><span>4</span></li>
-                            <li class="filter_btn" data-filter=".rating_5"><span>5</span></li>
-                        </ul>
-                    </li>
-                    <li id="offer_4">
-                        <span class="sorting_text">Khoảng cách</span>
-                        <i class="fas fa-angle-down"></i>
-                        <ul id="offer_box_4">
-                            <li class="num_sorting_btn"><span>50Km</span></li>
-                            <li class="num_sorting_btn"><span>100Km</span></li>
-                            <li class="num_sorting_btn"><span>200Km</span></li>
-                        </ul>
-                    </li>
-                    <li id="offer_5">
-                        <span class="sorting_text">Đánh giá</span>
-                        <i class="fas fa-angle-down"></i>
-                        <ul id="offer_box_5">
-                            <li class="num_sorting_btn"><span>Very Good</span></li>
-                            <li class="num_sorting_btn"><span>Good</span></li>
-                            <li class="num_sorting_btn"><span>Medium</span></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        
         <div class="box offers__box2">
             <div class="offers_grid" style="position: relative;">
                 <?php
                 require_once './admin/common/Paginator.class.php';
 
-                require_once("./connect.php");
-
                 $limit      = (isset($_GET['limit'])) ? $_GET['limit'] : 10;
                 $page       = (isset($_GET['page'])) ? $_GET['page'] : 1;
                 $links      = (isset($_GET['links'])) ? $_GET['links'] : 7;
-                $query      = "SELECT * FROM `tours`";
+                if (isset($_GET['searchTour'])) {
+                    if ($_GET['EndDate']) {
+                        $query      = "SELECT * FROM `tours` where EndDate like '%$_GET[EndDate]%' or StartDate like '%$_GET[StartDte]%' or Address like '%$_GET[Address]%' or Rate like '%$_GET[type]%'";
+                        
+                    } 
+                    else{
+                        $query      = "SELECT * FROM `tours` where StartDate like '%$_GET[StartDate]%' or Address like '%$_GET[Address]%'or Rate like '%$_GET[type]%'";
+                    }
+                } else {
+                    $query      = "SELECT * FROM `tours`";
+                }
+                echo $query;
 
                 $Paginator  = new Paginator($con, $query);
 

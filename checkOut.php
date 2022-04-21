@@ -1,7 +1,8 @@
 <?php
 require_once("./connect.php");
 include("./layout/header.php");
-if (isset($_GET["id"])) {
+
+if (isset($_GET['id'])) {
     $result = $con->query("SELECT * FROM `tours` WHERE Id = $_GET[id]");
     while ($row = mysqli_fetch_array($result)) {
         $Image =  $row['Image'];
@@ -11,11 +12,13 @@ if (isset($_GET["id"])) {
         $View = $row['View'];
         $Price = $row['Price'];
     }
-    $View += 1;
-    $con->query("UPDATE `tours` SET `View`='$View' WHERE Id =$_GET[id]");
+
+    $result2 = $con->query("SELECT * FROM `hotels` WHERE IdHotel = $_GET[hotelId]");
+    while ($row2 = mysqli_fetch_array($result2)) {
+        $hotelName =  $row2['HotelName'];
+        $hotelPrice = $row2['HotelPrice'];
+    }
 }
-
-
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -51,7 +54,7 @@ if (isset($_GET["id"])) {
                             <div class="card">
 
                                 <!--Card content-->
-                                <form class="card-body">
+                                <form class="card-body" method="POST" action="./vnpay_php/vnpay_create_payment.php">
 
                                     <!--Grid row-->
                                     <div class="row">
@@ -62,7 +65,7 @@ if (isset($_GET["id"])) {
                                             <!--firstName-->
                                             <div class="md-form ">
                                                 <label for="firstName" class="custom-label">First name</label>
-                                                <input type="text" id="firstName" class="form-control custom-input" placeholder="Long">
+                                                <input type="text" id="firstName" class="form-control custom-input" placeholder="Long" required>
                                             </div>
 
                                         </div>
@@ -75,7 +78,7 @@ if (isset($_GET["id"])) {
                                             <div class="md-form">
                                                 <label for="lastName" class="custom-label">Last name</label>
 
-                                                <input type="text" id="lastName" class="form-control custom-input" placeholder="Ngo Thanh">
+                                                <input type="text" id="lastName" class="form-control custom-input" placeholder="Ngo Thanh" required>
                                             </div>
 
                                         </div>
@@ -88,7 +91,7 @@ if (isset($_GET["id"])) {
                                     <div class="md-form mb-5">
                                         <label for="email" class="custom-label">Email</label>
 
-                                        <input type="text" id="email" class="form-control custom-input" placeholder="youremail@example.com">
+                                        <input type="text" id="email" class="form-control custom-input" placeholder="youremail@example.com" required>
                                     </div>
 
                                     <!--address-->
@@ -100,16 +103,13 @@ if (isset($_GET["id"])) {
                                     <!--phone-number-->
                                     <div class="md-form mb-5">
                                         <label for="phone-number" class="custom-label">Phone Number</label>
-                                        <input type="number" id="phone-number" class="form-control custom-input" placeholder="0988410926">
+                                        <input type="number" id="phone-number" class="form-control custom-input" placeholder="0988410926" required>
                                     </div>
                                     <div class="row">
                                         <!--Grid column-->
                                         <div class="col-lg-4 col-md-12 mb-4">
                                             <label for="country" class="custom-label">Adults</label>
-                                            <input type="number" class="form-control custom-input" id="Adults" placeholder="0" required>
-
-
-
+                                            <input min="0" type="number" class="form-control custom-input" id="Adults" placeholder="0" required>
                                         </div>
                                         <!--Grid column-->
 
@@ -117,10 +117,7 @@ if (isset($_GET["id"])) {
                                         <div class="col-lg-4 col-md-6 mb-4">
 
                                             <label for="state" class="custom-label">Kids</label>
-                                            <input type="number" class="form-control custom-input" id="Kids" placeholder="0" required>
-
-
-
+                                            <input min="0" type="number" class="form-control custom-input" id="Kids" placeholder="0">
                                         </div>
                                         <!--Grid column-->
 
@@ -128,24 +125,47 @@ if (isset($_GET["id"])) {
                                         <div class="col-lg-4 col-md-6 mb-4">
 
                                             <label for="zip" class="custom-label">Baby</label>
-                                            <input type="number" class="form-control custom-input" id="Baby" placeholder="0" required>
+                                            <input min="0" type="number" class="form-control custom-input" id="Baby" placeholder="0">
                                         </div>
                                         <!--Grid column-->
-                                    </div>
-                                   
-                                    <?php
-                                    $result2 = $con->query("SELECT * FROM `hotels` left join tourhotels on hotels.IdHotel = tourhotels.HotelId left join tours on tourhotels.TourId = tours.Id where tourId=$_GET[id]");
-                                    ?>
-                                    <div class="md-form mb-12">
-                                        <label for="phone-number" class="custom-label">Hotel of The Tour</label>
-                                        <select style="height: 33px; margin: bottom 15px;" class="form-control custom-input">
-                                            <option selected>Choose a Hotel</option>
-                                            <?php
-                                            while ($row2 = mysqli_fetch_array($result2)) {
-                                                echo "<option value='$row2[Id]'>$row2[HotelName]</option>";
-                                            }
-                                            ?>
-                                        </select>
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <h4>Method Payment</h4>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                <img src="./styles/images/cash.png" style="height: 50px;">
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Cash
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                                <img src="./styles/images/transfer.png" style="height: 50px;">
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    Transfer
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                                                <img src="./styles/images/momo1.png" style="height: 50px; width: 50px;">
+                                                <label class="form-check-label" for="exampleRadios3">
+                                                    Momo
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" >
+                                                <img src="./styles/images/vnpay.png" style="height: 50px;">
+                                                <label class="form-check-label" for="exampleRadios4">
+                                                    VNPay
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" >
+                                                <img src="./styles/images/paypal.jpg" style="height: 50px;">
+                                                <label class="form-check-label" for="exampleRadios4">
+                                                    Paypal
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="custom-control custom-checkbox">
@@ -156,6 +176,7 @@ if (isset($_GET["id"])) {
                                         <input type="checkbox" class="custom-control-input" id="save-info">
                                         <label class="custom-control-label" for="save-info" style="font-size: medium;">Save this information for next time</label>
                                     </div>
+
                                     <hr>
                                     <hr class="mb-4">
                                     <button class="btn btn-primary btn-lg btn-block" type="submit" style="height: 40px; font-size: medium;">Payment Now!</button>
@@ -181,52 +202,41 @@ if (isset($_GET["id"])) {
                                         <h3 class="my-0">Tour Name</h3>
                                         <h5 class="text-muted"><?php echo $Name ?></h5>
                                     </div>
-                                    <span class="text-muted"><?php echo $Price ?></span>
+                                    <span id="priceTour" class="text-muted"><?php echo $Price ?></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h3 class="my-0">Hotel Name</h3>
+                                        <h5 class="text-muted"><?php echo $hotelName ?></h5>
+                                    </div>
+                                    <span id="priceHotel" class="text-muted"><?php echo $hotelPrice ?></span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <div>
                                         <h3 class="my-0">Adults</h3>
-                                        <h5 class="text-muted" id="briefAdults">x0</h5>
+                                        <h5 class="text-muted" id="briefAdults">x1</h5>
                                     </div>
-                                    <span class="text-muted" id="priceAdults">$50</span>
+                                    <span class="text-muted" id="priceAdults">0</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <div>
                                         <h3 class="my-0">Kids (2 - 12)</h3>
                                         <h5 class="text-muted" id="briefKids">x0</h5>
                                     </div>
-                                    <span class="text-muted" id="priceKids">$8</span>
+                                    <span class="text-muted" id="priceKids">0</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <div>
                                         <h3 class="my-0">Baby (under 2 year old)</h3>
                                         <h5 class="text-muted" id="briefBaby">x0</h5>
                                     </div>
-                                    <span class="text-muted" id="priceBaby">$8</span>
+                                    <span class="text-muted" id="priceBaby">0</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between bg-light">
-                                    <div class="text-success">
-                                        <h3 class="my-0">Promo code</h3>
-                                    </div>
-                                    <span class="text-success">-$5</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <h3 style="color: red;">Total (USD)</h3>
-                                    <strong>$20</strong>
+                                    <h3 id="total" style="color: red;">Total </h3>(USD)
                                 </li>
                             </ul>
                             <!-- Cart -->
-
-                            <!-- Promo code -->
-                            <form class="card p-2">
-                                <div class="input-group">
-                                    <input type="text" class="form-control custom-input" placeholder="Promo code" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary btn-md waves-effect m-0" type="button" style="font-size: 14px;">Redeem</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- Promo code -->
 
                         </div>
                         <!--Grid column-->
@@ -289,6 +299,7 @@ include("./layout/footer.php");
         });
     })
 </script>
+
 <script>
     $("#single_item").slick({
         dots: true
@@ -298,24 +309,45 @@ include("./layout/footer.php");
     });
 
 
-
     $("#Adults").on("input", (e) => {
         $("#briefAdults").text("x" + (e.target.value));
-        $("#priceAdults").text("$" + (e.target.value * <?php echo $Price ?>));
+        $("#priceAdults").text((e.target.value * <?php echo $Price ?>));
+        $("#total").text(
+            parseInt($("#priceHotel").text()) +
+            parseInt($("#priceAdults").text()) +
+            parseInt($("#priceKids").text()) +
+            parseInt($("#priceBaby").text()));
 
     })
 
     $("#Kids").on("input", (e) => {
         $("#briefKids").text("x" + (e.target.value))
-        $("#priceKids").text("$" + (e.target.value * <?php echo $Price ?>));
+        $("#priceKids").text((e.target.value * <?php echo $Price - 50 ?>));
+        $("#total").text(
+            parseInt($("#priceHotel").text()) +
+            parseInt($("#priceAdults").text()) +
+            parseInt($("#priceKids").text()) +
+            parseInt($("#priceBaby").text()));
 
     })
 
     $("#Baby").on("input", (e) => {
         $("#briefBaby").text("x" + (e.target.value))
-        $("#priceBaby").text("$" + (e.target.value * <?php echo $Price ?>));
+        $("#priceBaby").text((e.target.value * <?php echo $Price - 75 ?>));
+        $("#total").text(
+            parseInt($("#priceHotel").text()) +
+            parseInt($("#priceAdults").text()) +
+            parseInt($("#priceKids").text()) +
+            parseInt($("#priceBaby").text())
+        );
 
     })
+    $("#total").text(
+        parseInt($("#priceHotel").text()) +
+        parseInt($("#priceAdults").text()) +
+        parseInt($("#priceKids").text()) +
+        parseInt($("#priceBaby").text())
+    );
 </script>
 
 </html>

@@ -2,8 +2,6 @@
 include("./layout/header.php")
 ?>
 
-
-<!-- Begin Page Content -->
 <div class="container-fluid">
 
     <div class="card shadow mb-4">
@@ -27,15 +25,13 @@ include("./layout/header.php")
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 245px;">Hotel Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;">Price</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;">Image</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 97.4375px;">Type Room</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 97.4375px;">Menu</th>
-
-
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;"><center>Price</center></th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;"><center>Image</center></th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 97.4375px;"><center>Type Room</center></th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 81.2875px;"><center>Address</center></th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 97.4375px;"><center>Menu</center></th>
                                     </tr>
                                 </thead>
-
 
                                 <tbody>
                                     <?php
@@ -57,28 +53,28 @@ include("./layout/header.php")
                                         <tr>
                                             <td><?php echo $results->data[$i]['HotelName']; ?></td>
                                             <td><?php echo $results->data[$i]['HotelPrice']; ?></td>
-                                            <td><img style="height: 80px;" src="upload/<?php echo $results->data[$i]['HotelImage']; ?>" /></td>
+                                            <td><center><img style="height: 80px; width: 120px;" src="upload/<?php echo $results->data[$i]['HotelImage']; ?>" /></center></td>
                                             <td>
                                                 <?php 
                                                 if($results->data[$i]['type']==0){
                                                     echo "Single bed room";
-
                                                 }
                                                 else{
                                                     echo"Twin bed room";
                                                 }
-                                            
                                             ?>
                                             </td>
                                             
+                                            <td><?php echo $results->data[$i]['HotelAddress']; ?></td>
+
                                             <td>
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Menu
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="Hotels/updateHotel.php?id=<?php echo $results->data[$i]['Id']; ?>">Update</a>
-                                                        <a class="dropdown-item" href="hotels.php?delete=<?php echo $results->data[$i]['Id']; ?>">Delete</a>
+                                                        <a class="dropdown-item" href="Hotels/updateHotel.php?id=<?php echo $results->data[$i]['IdHotel']; ?>">Update</a>
+                                                        <a class="dropdown-item" href="hotels.php?delete=<?php echo $results->data[$i]['IdHotel']; ?>">Delete</a>
                                                     </div>
                                                 </div>
                                             </td>
