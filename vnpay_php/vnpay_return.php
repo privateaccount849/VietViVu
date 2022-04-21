@@ -74,7 +74,7 @@
                 </div> 
                 <div class="form-group">
                     <label >Thời gian thanh toán:</label>
-                    <label><?php echo $_GET['vnp_PayDate'] ?></label>
+                    <label><?php echo date('Y-m-d H:i:s');  ?></label>
                 </div> 
                 <div class="form-group">
                     <label >Kết quả:</label>
@@ -82,6 +82,8 @@
                         <?php
                         if ($secureHash == $vnp_SecureHash) {
                             if ($_GET['vnp_ResponseCode'] == '00') {
+                                $sql = "UPDATE `orders` SET `Status`='1' WHERE Id = $_GET[vnp_TxnRef]";
+                                $con->query($sql);
                                 echo "<span style='color:blue'>GD Thanh cong</span>";
                             } else {
                                 echo "<span style='color:red'>GD Khong thanh cong</span>";

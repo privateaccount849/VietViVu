@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>VietViVu</title>
-    <link rel="stylesheet" type="text/css" href="styles/css/main_style.css">
-    <link rel="stylesheet" type="text/css" href="styles/css/Animation.css">
+
+    <?php
+    define('WEB_ROOT', 'http://localhost');
+    define('WEB_ASSETS', WEB_ROOT . '/VietViVu');
+    session_start();
+    ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo  WEB_ASSETS; ?>/styles/css/main_style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo  WEB_ASSETS; ?>/styles/css/Animation.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick-theme.css" />
@@ -13,10 +19,7 @@
 </head>
 
 <body>
-    <?php
-    // // Start the session
-    session_start();
-    ?>
+ 
     <div id="wrapper">
         <!-- Header -->
         <header class="header">

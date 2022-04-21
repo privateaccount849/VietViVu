@@ -65,7 +65,7 @@ if (isset($_GET['id'])) {
                                             <!--firstName-->
                                             <div class="md-form ">
                                                 <label for="firstName" class="custom-label">First name</label>
-                                                <input type="text" id="firstName" class="form-control custom-input" placeholder="Long" required>
+                                                <input name="firstName" type="text" id="firstName" class="form-control custom-input" placeholder="Long" required>
                                             </div>
 
                                         </div>
@@ -78,7 +78,7 @@ if (isset($_GET['id'])) {
                                             <div class="md-form">
                                                 <label for="lastName" class="custom-label">Last name</label>
 
-                                                <input type="text" id="lastName" class="form-control custom-input" placeholder="Ngo Thanh" required>
+                                                <input name="lastName" type="text" id="lastName" class="form-control custom-input" placeholder="Ngo Thanh" required>
                                             </div>
 
                                         </div>
@@ -91,19 +91,19 @@ if (isset($_GET['id'])) {
                                     <div class="md-form mb-5">
                                         <label for="email" class="custom-label">Email</label>
 
-                                        <input type="text" id="email" class="form-control custom-input" placeholder="youremail@example.com" required>
+                                        <input name="email" type="text" id="email" class="form-control custom-input" placeholder="youremail@example.com" required>
                                     </div>
 
                                     <!--address-->
                                     <div class="md-form mb-5">
                                         <label for="address" class="custom-label">Address</label>
-                                        <input type="text" id="address" class="form-control custom-input" placeholder="1234 Main St">
+                                        <input name="address" type="text" id="address" class="form-control custom-input" placeholder="1234 Main St">
                                     </div>
 
                                     <!--phone-number-->
                                     <div class="md-form mb-5">
                                         <label for="phone-number" class="custom-label">Phone Number</label>
-                                        <input type="number" id="phone-number" class="form-control custom-input" placeholder="0988410926" required>
+                                        <input name="phoneNumber" type="number" id="phone-number" class="form-control custom-input" placeholder="0988410926" required>
                                     </div>
                                     <div class="row">
                                         <!--Grid column-->
@@ -130,56 +130,47 @@ if (isset($_GET['id'])) {
                                         <!--Grid column-->
                                         <div class="col-lg-4 col-md-6 mb-4">
                                             <h4>Method Payment</h4>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                <img src="./styles/images/cash.png" style="height: 50px;">
-                                                <label class="form-check-label" for="exampleRadios1">
-                                                    Cash
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
-                                                <img src="./styles/images/transfer.png" style="height: 50px;">
-                                                <label class="form-check-label" for="exampleRadios2">
-                                                    Transfer
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
-                                                <img src="./styles/images/momo1.png" style="height: 50px; width: 50px;">
-                                                <label class="form-check-label" for="exampleRadios3">
-                                                    Momo
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" >
-                                                <img src="./styles/images/vnpay.png" style="height: 50px;">
-                                                <label class="form-check-label" for="exampleRadios4">
-                                                    VNPay
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" >
-                                                <img src="./styles/images/paypal.jpg" style="height: 50px;">
-                                                <label class="form-check-label" for="exampleRadios4">
-                                                    Paypal
-                                                </label>
+                                            <div class="form-group">
+                                                <label for="bank_code">Ngân hàng</label>
+                                                <select name="bank_code" id="bank_code" class="form-control">
+                                                    <option value="">Không chọn(Cash)</option>
+                                                    <option value="NCB"> Ngan hang NCB</option>
+                                                    <option value="AGRIBANK"> Ngan hang Agribank</option>
+                                                    <option value="SCB"> Ngan hang SCB</option>
+                                                    <option value="SACOMBANK">Ngan hang SacomBank</option>
+                                                    <option value="EXIMBANK"> Ngan hang EximBank</option>
+                                                    <option value="MSBANK"> Ngan hang MSBANK</option>
+                                                    <option value="NAMABANK"> Ngan hang NamABank</option>
+                                                    <option value="VNMART"> Vi dien tu VnMart</option>
+                                                    <option value="VIETINBANK">Ngan hang Vietinbank</option>
+                                                    <option value="VIETCOMBANK"> Ngan hang VCB</option>
+                                                    <option value="HDBANK">Ngan hang HDBank</option>
+                                                    <option value="DONGABANK"> Ngan hang Dong A</option>
+                                                    <option value="TPBANK"> Ngân hàng TPBank</option>
+                                                    <option value="OJB"> Ngân hàng OceanBank</option>
+                                                    <option value="BIDV"> Ngân hàng BIDV</option>
+                                                    <option value="TECHCOMBANK"> Ngân hàng Techcombank</option>
+                                                    <option value="VPBANK"> Ngan hang VPBank</option>
+                                                    <option value="MBBANK"> Ngan hang MBBank</option>
+                                                    <option value="ACB"> Ngan hang ACB</option>
+                                                    <option value="OCB"> Ngan hang OCB</option>
+                                                    <option value="IVB"> Ngan hang IVB</option>
+                                                    <option value="VISA"> Thanh toan qua VISA/MASTER</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="same-address">
-                                        <label class="custom-control-label custom-label" for="same-address" style="font-size: medium;">Shipping address is the same as my billing address</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="save-info">
-                                        <label class="custom-control-label" for="save-info" style="font-size: medium;">Save this information for next time</label>
-                                    </div>
 
+
+                                    <!--phone-number-->
+                                    <div class="md-form mb-5">
+                                        <label for="phone-number" class="custom-label">Note</label>
+                                        <input name="order_desc" type="text" id="phone-number" class="form-control custom-input" placeholder="0988410926" required>
+                                    </div>
                                     <hr>
+                                    <input name="amount" type="hidden" id="totalPayment" />
                                     <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit" style="height: 40px; font-size: medium;">Payment Now!</button>
+                                    <button name="redirect" class="btn btn-primary btn-lg btn-block" type="submit" style="height: 40px; font-size: medium;">Payment Now!</button>
                                 </form>
                             </div>
                             <!--/.Card-->
@@ -317,13 +308,22 @@ include("./layout/footer.php");
             parseInt($("#priceAdults").text()) +
             parseInt($("#priceKids").text()) +
             parseInt($("#priceBaby").text()));
-
+        $("#totalPayment").val(
+            parseInt($("#priceHotel").text()) +
+            parseInt($("#priceAdults").text()) +
+            parseInt($("#priceKids").text()) +
+            parseInt($("#priceBaby").text()));
     })
 
     $("#Kids").on("input", (e) => {
         $("#briefKids").text("x" + (e.target.value))
         $("#priceKids").text((e.target.value * <?php echo $Price - 50 ?>));
         $("#total").text(
+            parseInt($("#priceHotel").text()) +
+            parseInt($("#priceAdults").text()) +
+            parseInt($("#priceKids").text()) +
+            parseInt($("#priceBaby").text()));
+        $("#totalPayment").val(
             parseInt($("#priceHotel").text()) +
             parseInt($("#priceAdults").text()) +
             parseInt($("#priceKids").text()) +
@@ -340,6 +340,11 @@ include("./layout/footer.php");
             parseInt($("#priceKids").text()) +
             parseInt($("#priceBaby").text())
         );
+        $("#totalPayment").val(
+            parseInt($("#priceHotel").text()) +
+            parseInt($("#priceAdults").text()) +
+            parseInt($("#priceKids").text()) +
+            parseInt($("#priceBaby").text()));
 
     })
     $("#total").text(
