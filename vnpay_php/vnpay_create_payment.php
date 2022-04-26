@@ -10,14 +10,14 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
  */
 require_once("./config.php");
 $start_date = date('Y-m-d H:i:s');
-$end_date = date("Y-m-d 23:59:59", strtotime('+3 days', strtotime($start_date)));
+$end_date = date("Y-m-d 23:59:59", strtotime('+1 days', strtotime($start_date)));
 
 
 
 $vnp_TxnRef = mt_rand(100000,999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
 $vnp_OrderInfo = $_POST['order_desc'];
 $vnp_OrderType = "billpayment";
-$vnp_Amount = $_POST['amount'] * 2400000;
+$vnp_Amount = $_POST['amount'] * 23000* 100;
 $vnp_Locale = "en";
 $vnp_BankCode = $_POST['bank_code'];
 $firstName = $_POST['firstName'];
