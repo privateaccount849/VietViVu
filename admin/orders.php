@@ -69,7 +69,7 @@ include("./layout/header.php")
                                             <td><?php echo $results->data[$i]['Email']; ?></td>
                                             <td><?php echo $results->data[$i]['Note']; ?></td>
                                             <td><?php echo $results->data[$i]['createAt']; ?></td>
-                                            <td><?php echo round( $results->data[$i]['Total']/2300000); ?>$</td>
+                                            <td><?php echo $results->data[$i]['Total']; ?>$</td>
                                             <td>
                                                 <?php 
                                                 if($results->data[$i]['Status']==1){

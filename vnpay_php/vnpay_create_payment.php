@@ -17,6 +17,7 @@ $end_date = date("Y-m-d 23:59:59", strtotime('+1 days', strtotime($start_date)))
 $vnp_TxnRef = mt_rand(100000,999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
 $vnp_OrderInfo = $_POST['order_desc'];
 $vnp_OrderType = "billpayment";
+$vnp_Amount2 = $_POST['amount'];
 $vnp_Amount = $_POST['amount'] * 23000* 100;
 $vnp_Locale = "en";
 $vnp_BankCode = $_POST['bank_code'];
@@ -30,7 +31,7 @@ $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 $vnp_ExpireDate = $end_date;
 
 $sql = "INSERT INTO `orders`(`Id`, `FirstName`, `LastName`, `Address`, `Total`, `PhoneNumber`, `Email`, `Note`, `createAt`) VALUES 
-('$vnp_TxnRef','$firstName','$lastName','$address','$vnp_Amount','$phoneNumber','$email','$vnp_OrderInfo', '$start_date')";
+('$vnp_TxnRef','$firstName','$lastName','$address','$vnp_Amount2','$phoneNumber','$email','$vnp_OrderInfo', '$start_date')";
 $con->query($sql);
 //Billing
 if (isset($fullName) && trim($fullName) != '') {

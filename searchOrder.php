@@ -184,7 +184,7 @@ if (isset($_GET["id"])) {
                         
 
                         <label>
-                            <input  readonly id="form_email" class="contact__form_email input_field" name="email" type="text" value="Total: <?php echo $Total/2300000 ?>$">
+                            <input  readonly id="form_email" class="contact__form_email input_field" name="email" type="text" value="Total: <?php echo $Total ?>$">
                         </label>
                         <textarea name="mess" id="form_mess" rows="4" class="contact__form_mess input_field"><?php echo $Note ?></textarea>
                         

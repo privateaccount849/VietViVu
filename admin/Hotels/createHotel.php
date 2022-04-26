@@ -42,8 +42,15 @@ include("../layout/header.php")
                 </div>
                 <div class='form-group'>
                     <select class='form-control form-control-sm' name='type'>
-                        <option>Single bed room</option>
-                        <option>Twin bed room</option>
+                        <option value="0">Single bed room</option>
+                        <option value="1">Twin bed room</option>
+                    </select>
+                </div>
+                <div class='form-group'>
+                    <select class='form-control form-control-sm' name='Meal'>
+                        <option value="0">Breakfast</option>
+                        <option value="1">Lunch</option>
+                        <option value="2">Dinner</option>
                     </select>
                 </div>
 
@@ -67,6 +74,7 @@ if (isset($_POST["createHotel"])) {
     $type = $_POST["type"];
     $Rate = $_POST["Rate"];
     $Title = $_POST["SortTitle"];
+    $Meal = $_POST["Meal"];
 
     $output_dir = "../upload/";/* Path for file upload */
     $RandomNum   = time();
@@ -86,8 +94,8 @@ if (isset($_POST["createHotel"])) {
 
     move_uploaded_file($_FILES["Image"]["tmp_name"][0], $output_dir . "/" . $NewImageName);
     if (isset($NewImageName)) {
-        $sql = "INSERT INTO `hotels`(`HotelName`, `HotelDescription`, `HotelPrice`, `HotelImage`, `type`, `HotelRate`, `HotelSortTitle`, `HotelAddress`) 
-        VALUES ('$Name','$Description','$Price','$NewImageName','$type', '$Rate', '$Title', '$Address')";
+        $sql = "INSERT INTO `hotels`(`HotelName`, `HotelDescription`, `HotelPrice`, `HotelImage`, `type`, `HotelRate`, `HotelSortTitle`, `HotelAddress`,`Meal`) 
+        VALUES ('$Name','$Description','$Price','$NewImageName','$type', '$Rate', '$Title', '$Address','$Meal')";
 
         if ($con->query($sql) === TRUE) {
             echo "New Tour created successfully";

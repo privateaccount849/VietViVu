@@ -10,10 +10,10 @@
     <meta name="author" content="">
     <title>VNPAY RESPONSE</title>
     <!-- Bootstrap core CSS -->
-    <link href="/vnpay_php/assets/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="/vnpay_php/assets/jumbotron-narrow.css" rel="stylesheet">
-    <script src="/vnpay_php/assets/jquery-1.11.3.min.js"></script>
+    <link href="assets/jumbotron-narrow.css" rel="stylesheet">
+    <script src="assets/jquery-1.11.3.min.js"></script>
 </head>
 
 <body>
@@ -44,8 +44,9 @@
     ?>
     <!--Begin display -->
     <div class="container">
+
         <div class="header clearfix">
-            <h3 class="text-muted">VNPAY RESPONSE</h3>
+            <h3 class="text-muted">VNPAY RESPONSE</center></h3>
         </div>
         <div class="table-responsive">
             <div class="form-group">
@@ -87,6 +88,9 @@
                                 $email = $row['Email'];
                                 $fullName = $row['FirstName'] . $row['LastName'];
                                 $sent = $row['Sent'];
+                                $Total = $row['Total'];
+                                $createAt = $row['createAt'];
+                                $Note = $row['Note'];
 
                             }
                             if($sent==0){
@@ -107,8 +111,36 @@
                                     $mail->setFrom('longntbhaf190233@fpt.edu.vn', 'Thanh Long');
                                     $mail->addAddress($email ,$fullName); //mail và tên người nhận  
                                     $mail->isHTML(true);  // Set email format to HTML
-                                    $mail->Subject = 'VietViVu Payment successly';
-                                    $noidungthu = '<h2>Thank you for use my Service</h2>';
+                                    $mail->Subject = 'VietViVu Successful transaction notification';
+                                    $noidungthu = "  <div class='form-group'>
+                                    <label>Mã đơn hàng:  $_GET[vnp_TxnRef]</label>
+                    
+                                </div>
+                                <div class='form-group'>
+                    
+                                    <label>Số tiền:</label>
+                                    <label>$Total$</label>
+                                </div>
+                                <div class='form-group'>
+                                    <label>Nội dung thanh toán:</label>
+                                    <label>$Note</label>
+                                </div>
+                                
+                                <div class='form-group'>
+                                    <label>Mã GD Tại VNPAY:</label>
+                                    <label>$_GET[vnp_TransactionNo]</label>
+                                </div>
+                                <div class='form-group'>
+                                    <label>Mã Ngân hàng:</label>
+                                    <label>$_GET[vnp_BankCode]</label>
+                                </div>
+                                <div class='form-group'>
+                                    <label>Thời gian thanh toán:</label>
+                                    <label>$createAt</label>
+                                </div>
+                                <div class='form-group'>
+                                    <label>Thank for using my services</label>
+                                </div>";
                                     $mail->Body = $noidungthu;
                                     $mail->smtpConnect(array(
                                         "ssl" => array(
@@ -118,7 +150,7 @@
                                         )
                                     ));
                                     $mail->send();
-                                    echo 'Đã gửi mail xong';
+                                    //echo 'Đã gửi mail xong';
                                 } catch (Exception $e) {
                                     echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
                                 }
@@ -130,7 +162,6 @@
                             }
                             echo "<span style='color:blue'>GD Thanh cong</span>";
                         
-                          
                         } else {
                             echo "<span style='color:red'>GD Khong thanh cong</span>";
                         }

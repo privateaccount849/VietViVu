@@ -70,11 +70,11 @@ include("./layout/header.php")
                 $links      = (isset($_GET['links'])) ? $_GET['links'] : 7;
                 if (isset($_GET['searchTour'])) {
                     if ($_GET['EndDate']) {
-                        $query      = "SELECT * FROM `tours` where EndDate like '%$_GET[EndDate]%' or StartDate like '%$_GET[StartDte]%' or Address like '%$_GET[Address]%' or Rate like '%$_GET[type]%'";
+                        $query      = "SELECT * FROM `tours` where EndDate like '%$_GET[EndDate]%' and StartDate like '%$_GET[StartDte]%' and Address like '%$_GET[Address]%' and Rate like '%$_GET[type]%'";
                         
                     } 
                     else{
-                        $query      = "SELECT * FROM `tours` where StartDate like '%$_GET[StartDate]%' or Address like '%$_GET[Address]%'or Rate like '%$_GET[type]%'";
+                        $query      = "SELECT * FROM `tours` where StartDate like '%$_GET[StartDate]%' and Address like '%$_GET[Address]%'and Rate like '%$_GET[type]%'";
                     }
                 } else {
                     $query      = "SELECT * FROM `tours`";
@@ -84,7 +84,7 @@ include("./layout/header.php")
                 $Paginator  = new Paginator($con, $query);
 
                 $results    = $Paginator->getData($limit, $page);
-                function currency_format($number, $suffix = 'đ')
+                function currency_format($number, $suffix = 'USD')
                 {
                     if (!empty($number)) {
                         return number_format($number, 0, ',', '.') . "{$suffix}";

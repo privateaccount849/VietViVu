@@ -10,6 +10,16 @@ if (isset($_GET["id"])) {
         } else {
             $typee = '<option value=0>Single bed room</option><option selected value=1>Twin bed room</option>';
         }
+        if ($row['Meal'] == 0) {
+            $Meal = '<option selected value=0>Breakfast</option><option value=1>Lunch</option><option value=2>Dinner</option>';
+        } 
+        else if($row['Meal'] == 1){
+            $Meal = '<option  value=0>Breakfast</option><option selected value=1>Lunch</option><option value=2>Dinner</option>';
+
+        }
+        else{
+            $Meal= '<option  value=0>Breakfast</option><option value=1>Lunch</option><option selected value=2>Dinner</option>';
+        }
         echo "
        <div class='container-fluid'>
        
@@ -52,9 +62,16 @@ if (isset($_GET["id"])) {
                        </div>
                        
                        <div class='form-group'>
-                       <label for='SortTile'>Type Room</label>
+                       <label for='type'>Type Room</label>
                        <select class='form-control form-control-sm' name='type' >
                        $typee
+                       </select>
+                       </div>
+
+                       <div class='form-group'>
+                       <label for='Meal'>Select food</label>
+                       <select class='form-control form-control-sm' name='Meal' >
+                       $Meal
                        </select>
                        </div>
                        <button name='updateTour' type='submit' class='btn btn-primary'>Update</button>
@@ -77,6 +94,7 @@ if (isset($_POST["updateTour"])) {
     $Price = $_POST["Price"];
     $type = $_POST["type"];
     $HotelAddress = $_POST["HotelAddress"];
+    $Meal = $_POST["Meal"];
 
     $output_dir = "../upload/";/* Path for file upload */
     $RandomNum   = time();
@@ -98,7 +116,8 @@ if (isset($_POST["updateTour"])) {
     if (!empty($_FILES['Image']['type'][0])) {
         $sql = "UPDATE `hotels` SET `HotelName`='$Name',`HotelDescription`='$Description',
         `HotelImage`='$NewImageName',`HotelPrice`='$Price',`HotelAddress`='$HotelAddress',
-        `type`='$type' WHERE Id = $_GET[id]";
+        `type`='$type' ,`Meal`='$Meal'
+         WHERE Id = $_GET[id]";
         if ($con->query($sql) === TRUE) {
             echo "<script>alert('Tour has been Update successful!')</script>";
             echo "<script>window.open('../index.php','_self')</script>";
@@ -107,7 +126,7 @@ if (isset($_POST["updateTour"])) {
         }
     } else {
         $sql = "UPDATE `hotels` SET `HotelName`='$Name',`HotelDescription`='$Description',
-        `HotelPrice`='$Price',`type`='$type'
+        `HotelPrice`='$Price',`type`='$type',`Meal`='$Meal'
         WHERE IdHotel = $_GET[id]";
         if ($con->query($sql) === TRUE) {
             echo "<script>alert('Hotel has been Update successful!')</script>";

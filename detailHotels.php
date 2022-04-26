@@ -3,8 +3,8 @@ require_once("./connect.php");
 include("./layout/header.php");
 if (isset($_GET["id"])) {
 
-    
-        
+
+
 
     $result = $con->query("SELECT * FROM `hotels` WHERE IdHotel = $_GET[id]");
     while ($row = mysqli_fetch_array($result)) {
@@ -21,12 +21,13 @@ if (isset($_GET["id"])) {
         $Rate = $row['HotelRate'];
         $Address = $row['HotelAddress'];
         $SortTitle =  $row['HotelSortTitle'];
+        $Meal = $row['Meal'];
+        $type = $row['type'];
     }
 }
 
 ?>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <div class="main">
     <div class="main__slide_offers">
@@ -46,18 +47,33 @@ if (isset($_GET["id"])) {
             <div class="about__content">
                 <div class="about__title"><?php echo $Name ?></div>
                 <p class="about__text"><?php echo $SortTitle ?></p>
-                <p>Address:</p>
-                <p class="about__text"><?php echo $Address ?></p>
-                <p>Rating:</p><div style="color: white;" class='rating rating_<?php echo $Rate?>'>
-                                        <i class='fas fa-star'></i>
-                                        <i class='fas fa-star'></i>
-                                        <i class='fas fa-star'></i>
-                                        <i class='fas fa-star'></i>
-                                        <i class='fas fa-star'></i>
-                                    </div>
-                <p class="about__text"><?php echo $Price ?></p>
-                <p class="about__text"><select style="height: 40px;" class="form-control"><?php echo $type ?></select></p>
-                
+                <p class="about__text">Address:  <?php echo $Address ?></p>
+                <p class="about__text">Rating:</p>
+                <div style="color: white;" class='rating rating_<?php echo $Rate ?>'>
+                    <i class='fas fa-star'></i>
+                    <i class='fas fa-star'></i>
+                    <i class='fas fa-star'></i>
+                    <i class='fas fa-star'></i>
+                    <i class='fas fa-star'></i>
+                </div>
+                <p class="about__text">$<?php echo $Price ?></p>
+                <p class="about__text"><?php if ($type == 0) {
+                                            $type = 'Single Bed Room';
+                                    
+                                        } else {
+                                            $type = 'Twin Bed Room';
+                                        }
+                                        echo $type ?></p>
+                <p class="about__text"><?php if ($Meal == 0) {
+                                            $Meal = 'Breakfast';
+                                        } else if ($Meal == 1) {
+                                            $Meal = 'Lunch';
+                                        } else {
+                                            $Meal = 'Dinner';
+                                        }
+                                        echo $Meal ?></p>
+
+
             </div>
         </div>
     </div>
@@ -70,8 +86,7 @@ if (isset($_GET["id"])) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: burlywood;">
@@ -111,14 +126,11 @@ if (isset($_GET["id"])) {
 include("./layout/footer.php");
 ?>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -127,41 +139,41 @@ include("./layout/footer.php");
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.min.js"></script>
 
 <script>
-window.onscroll = function() {
-    scrollFunction(),
-        backTop()
-};
+    window.onscroll = function() {
+        scrollFunction(),
+            backTop()
+    };
 
-function scrollFunction() {
-    if (document.body.scrollTop > 35 || document.documentElement.scrollTop > 35) {
-        $(document).ready(function() {
-            $(".top_bar").hide('slow');
-        });
+    function scrollFunction() {
+        if (document.body.scrollTop > 35 || document.documentElement.scrollTop > 35) {
+            $(document).ready(function() {
+                $(".top_bar").hide('slow');
+            });
 
-    } else {
-        $(document).ready(function() {
-            $(".top_bar").show();
-        });
+        } else {
+            $(document).ready(function() {
+                $(".top_bar").show();
+            });
+        }
     }
-}
 
-$(function() {
-    $("#tabs").tabs();
-});
-
-$(document).ready(function() {
-    $(".search__item").click(function() {
-        $(".input_search").toggle("slow");
+    $(function() {
+        $("#tabs").tabs();
     });
-})
+
+    $(document).ready(function() {
+        $(".search__item").click(function() {
+            $(".input_search").toggle("slow");
+        });
+    })
 </script>
 <script>
-$("#single_item").slick({
-    dots: true
-});
-$("#testimonials").slick({
-    dots: false
-});
+    $("#single_item").slick({
+        dots: true
+    });
+    $("#testimonials").slick({
+        dots: false
+    });
 </script>
 
 </html>
