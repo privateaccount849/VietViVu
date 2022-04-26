@@ -88,11 +88,13 @@
         LEFT JOIN roles on userroles.RoleId=roles.Id
         where email='$email' and password='$password'";
         $result = $con->query($sql);
+        $roles = array();
         if ($result->num_rows != 0) {
             while ($row = mysqli_fetch_array($result)) {
-                $_SESSION["RoleName"] = $row['RoleName'];
+                array_push($roles,$row['RoleName']);
                 $_SESSION["FullName"] = $row['FirstName'].' '.$row['LastName'];
             }
+            $_SESSION["RoleName"]  = $roles;
             echo "<script>window.open('../index.php','_self')</script>";
             
         } else {

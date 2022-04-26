@@ -47,7 +47,7 @@ include("./layout/header.php")
                                     $limit      = (isset($_GET['limit'])) ? $_GET['limit'] : 10;
                                     $page       = (isset($_GET['page'])) ? $_GET['page'] : 1;
                                     $links      = (isset($_GET['links'])) ? $_GET['links'] : 7;
-                                    $query      = "SELECT * FROM `orders`";
+                                    $query      = "SELECT * FROM `orders` ORDER BY createAt DESC";
 
                                     $Paginator  = new Paginator($con, $query);
 
@@ -69,10 +69,10 @@ include("./layout/header.php")
                                             <td><?php echo $results->data[$i]['Email']; ?></td>
                                             <td><?php echo $results->data[$i]['Note']; ?></td>
                                             <td><?php echo $results->data[$i]['createAt']; ?></td>
-                                            <td><?php echo $results->data[$i]['Total']; ?></td>
+                                            <td><?php echo round( $results->data[$i]['Total']/2300000); ?>$</td>
                                             <td>
                                                 <?php 
-                                                if($results->data[$i]['Status']==0){
+                                                if($results->data[$i]['Status']==1){
                                                     echo "Completly Payment";
                                                 }
                                                 else{

@@ -58,7 +58,6 @@ include("../layout/header.php")
 
 
 <?php
-
 if (isset($_POST["createTour"])) {
     require_once("../../connect.php");
 

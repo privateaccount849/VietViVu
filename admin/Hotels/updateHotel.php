@@ -76,6 +76,7 @@ if (isset($_POST["updateTour"])) {
     $Description = $_POST["Description"];
     $Price = $_POST["Price"];
     $type = $_POST["type"];
+    $HotelAddress = $_POST["HotelAddress"];
 
     $output_dir = "../upload/";/* Path for file upload */
     $RandomNum   = time();
@@ -96,7 +97,7 @@ if (isset($_POST["updateTour"])) {
     move_uploaded_file($_FILES["Image"]["tmp_name"][0], $output_dir . "/" . $NewImageName);
     if (!empty($_FILES['Image']['type'][0])) {
         $sql = "UPDATE `hotels` SET `HotelName`='$Name',`HotelDescription`='$Description',
-        `HotelImage`='$NewImageName',`HotelPrice`='$Price',
+        `HotelImage`='$NewImageName',`HotelPrice`='$Price',`HotelAddress`='$HotelAddress',
         `type`='$type' WHERE Id = $_GET[id]";
         if ($con->query($sql) === TRUE) {
             echo "<script>alert('Tour has been Update successful!')</script>";

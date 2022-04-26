@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo  WEB_ASSETS; ?>/admin/index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo in_array("Admin", $_SESSION["RoleName"]) ? WEB_ASSETS . "/admin/index.php" : WEB_ASSETS . "/admin/hotels.php"; ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="<?php echo in_array("Admin", $_SESSION["RoleName"]) ? WEB_ASSETS . "/admin/index.php" : WEB_ASSETS . "/admin/hotels.php"; ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -58,51 +58,77 @@
                 Management
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fa-solid fa-people-roof"></i>
-                    <span>Users</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Users</h6>
-                        <a class="collapse-item" href="<?php echo  WEB_ASSETS; ?>/admin/users.php">List Users</a>
-                        <a class="collapse-item" href="<?php echo  WEB_ASSETS; ?>/admin/tours/createTour.php">Create Users</a>
-                    </div>
-                </div>
-            </li>
+            <?php
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fa-solid fa-map-pin"></i>
-                    <span>Tours</span>
+            if (in_array("Admin", $_SESSION["RoleName"])) {
+                $listTour = WEB_ASSETS . "/admin/index.php";
+                $createTour = WEB_ASSETS . "/admin/Tours/createTour.php";
+                $ListOrder = WEB_ASSETS . "/admin/orders.php";
+                $CreateHotel = WEB_ASSETS . "/admin/Hotels/createHotel.php";
+                $ListHotel = WEB_ASSETS . "/admin/hotels.php";
+                echo "
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class='nav-item'>
+                    <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseTwo'>
+                        <i class='fa-solid fa-map-pin'></i>
+                        <span>Tours</span>
+                    </a>
+                    <div id='collapseTwo' class='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
+                        <div class='bg-white py-2 collapse-inner rounded'>
+                            <h6 class='collapse-header'>List Tours</h6>
+                            <a class='collapse-item' href='$listTour'>List Tours</a>
+                            <a class='collapse-item' href='$createTour'>Create Tours</a>
+                        </div>
+                    </div>
+                </li>
+    
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class='nav-item'>
+                    <a class='nav-link collapsed' href='' data-toggle='collapse' data-target='#collapseThree' aria-expanded='true' aria-controls='collapseThree'>
+                        <i class='fa-solid fa-newspaper'></i>
+                        <span>Orders</span>
+                    </a>
+                    <div id='collapseThree' class='collapse' aria-labelledby='headingUtilities' data-parent='#accordionSidebar'>
+                        <div class='bg-white py-2 collapse-inner rounded'>
+                            <h6 class='collapse-header'>List Orders</h6>
+                            <a class='collapse-item' href='$ListOrder'>List Orders</a>
+                        </div>
+                    </div>
+                </li>
+                <li class='nav-item'>
+                <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseFour' aria-expanded='true' aria-controls='collapseFour'>
+                    <i class='fa-solid fa-hotel'></i>
+                    <span>Hotels</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Tours</h6>
-                        <a class="collapse-item" href="<?php echo  WEB_ASSETS; ?>/admin/index.php">List Tours</a>
-                        <a class="collapse-item" href="<?php echo  WEB_ASSETS; ?>/admin/tours/createTour.php">Create Tours</a>
+                <div id='collapseFour' class='collapse' aria-labelledby='headingUtilities' data-parent='#accordionSidebar'>
+                    <div class='bg-white py-2 collapse-inner rounded'>
+                        <h6 class='collapse-header'>List Hotels</h6>
+                        <a class='collapse-item' href='$ListHotel'>List Hotels</a>
+                        <a class='collapse-item' href='$CreateHotel'>Create Hotels</a>
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fa-solid fa-newspaper"></i>
-                    <span>Orders</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Orders</h6>
-                        <a class="collapse-item" href="<?php echo  WEB_ASSETS; ?>/admin/orders.php">List Orders</a>
-                    </div>
+            <li class='nav-item'>
+            <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapsePages' aria-expanded='true' aria-controls='collapsePages'>
+                <i class='fas fa-fw fa-folder'></i>
+                <span>Pages</span>
+            </a>
+            <div id='collapsePages' class='collapse' aria-labelledby='headingPages' data-parent='#accordionSidebar'>
+                <div class='bg-white py-2 collapse-inner rounded'>
+                    <h6 class='collapse-header'>Login Screens:</h6>
+                    <a class='collapse-item' href='login.php'>Login</a>
+                    <a class='collapse-item' href='register.html'>Register</a>
+                    <a class='collapse-item' href='forgot-password.html'>Forgot Password</a>
+                    <div class='collapse-divider'></div>
+                    <h6 class='collapse-header'>Other Pages:</h6>
+                    <a class='collapse-item' href='404.html'>404 Page</a>
+                    <a class='collapse-item' href='blank.html'>Blank Page</a>
                 </div>
-            </li>
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            </div>
+        </li>
+            ";
+            } else {
+                echo '<li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                     <i class="fa-solid fa-hotel"></i>
                     <span>Hotels</span>
@@ -114,35 +140,18 @@
                         <a class="collapse-item" href="<?php echo  WEB_ASSETS; ?>/admin/news/createHotels.php">Create Hotels</a>
                     </div>
                 </div>
-            </li>
+            </li>';
+            }
+            ?>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -228,7 +237,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

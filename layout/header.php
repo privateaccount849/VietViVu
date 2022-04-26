@@ -61,15 +61,21 @@
                         <li class="main_nav__item"><a href="blog.php">NEWS</a></li>
                         <li class="main_nav__item"><a href="contact.php">CONTACT</a></li>
                         <?php 
-                        if (isset($_SESSION['RoleName'])) {
-                            echo '<li class="main_nav__item"><a href="admin">Admin</a></li>';
+                        if(isset( $_SESSION["RoleName"])){
+                        if (in_array("Admin", $_SESSION["RoleName"])) {
+                            echo '<li class="main_nav__item"><a href="admin">Management</a></li>';
                         } 
+
+                        else{
+                            echo '<li class="main_nav__item"><a href="admin/hotels.php">Management</a></li>';
+
+                        }}
                         ?>
                     </ul>
                 </div>
                 <div class="main_nav__search">
-                    <form action="offers.php" method="GET">
-                        <input name="Address" class="input_search" type="text">
+                    <form action="searchOrder.php" method="GET">
+                        <input name="id" class="input_search" type="text">
                     </form>
                     <div class="search__item"><i class="fas fa-search"></i></div>
                 </div>

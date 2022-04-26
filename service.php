@@ -94,7 +94,7 @@ include("./layout/header.php")
                     <div class="offers_item2">
                         <div class="offers_image f_image">
                             <div class="offers_image_background" style="background-image:url(./admin/upload/<?php echo $results->data[$i]['HotelImage']; ?>)"></div>
-                            <div class="offers_name"><a href="#"><?php echo $results->data[$i]['HotelName']; ?></a></div>
+                            <div class="offers_name"><a href="detailHotels.php?id=<?php echo $results->data[$i]['IdHotel']; ?>"><?php echo $results->data[$i]['HotelName']; ?></a></div>
                         </div>
                         <div class="offers_content">
                             <div class="offers_price"><?php echo currency_format($results->data[$i]['HotelPrice']); ?></div>

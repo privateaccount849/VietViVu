@@ -1,5 +1,8 @@
 <?php
-include("./layout/header.php")
+include("./layout/header.php");
+if(!in_array("Admin", $_SESSION["RoleName"])){
+    echo "<script>window.open('NotFound.php','_self')</script>";
+}
 ?>
 
 
@@ -83,7 +86,7 @@ include("./layout/header.php")
                                             <?php
                                             if (isset($_GET['delete'])) {
                                                 $TourId = $_GET['delete'];
-                                                $sql = "delete from tours where Id=$TourId";
+                                                $sql = "delete from tours where Id=$TourId"; //xoa tour theo id
                                                 $result = mysqli_query($con, $sql);
 
                                                 if ($result) {

@@ -56,16 +56,13 @@
             <div class="form-group">
 
                 <label>Số tiền:</label>
-                <label><?php echo $_GET['vnp_Amount'] ?></label>
+                <label><?php echo round($_GET['vnp_Amount']/2300000) ?>$</label>
             </div>
             <div class="form-group">
                 <label>Nội dung thanh toán:</label>
                 <label><?php echo $_GET['vnp_OrderInfo'] ?></label>
             </div>
-            <div class="form-group">
-                <label>Mã phản hồi (vnp_ResponseCode):</label>
-                <label><?php echo $_GET['vnp_ResponseCode'] ?></label>
-            </div>
+            
             <div class="form-group">
                 <label>Mã GD Tại VNPAY:</label>
                 <label><?php echo $_GET['vnp_TransactionNo'] ?></label>
@@ -129,8 +126,9 @@
                                 $con->query($sql);
                                 $sql2 = "UPDATE `orders` SET `Sent`='1' WHERE Id = $_GET[vnp_TxnRef]";
                                 $con->query($sql2);
-                                echo "<span style='color:blue'>GD Thanh cong</span>";
+                                
                             }
+                            echo "<span style='color:blue'>GD Thanh cong</span>";
                         
                           
                         } else {

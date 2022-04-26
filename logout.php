@@ -18,5 +18,5 @@ if (ini_get("session.use_cookies")) {
 
 // Finally, destroy the session.
 session_destroy();
-echo "<script>window.open('../index.php','_self')</script>";
+echo "<script>window.open('index.php','_self')</script>";
 ?>

@@ -30,7 +30,6 @@ include("./layout/header.php")
                             while ($row2 = mysqli_fetch_array($result2)) {
                                 echo "<option>$row2[Address]</option>";
                             }
-                           
                             ?>
                         </select>
                     </div>

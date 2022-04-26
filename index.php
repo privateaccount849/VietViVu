@@ -57,14 +57,18 @@ include("./layout/header.php")
                     <div class="search_content__item">
                         <div>Places to go</div>
                         <select name="Address" class="search_content__input">
-                            <option>Hà Nội</option>
-                            <option>Đà Nẵng</option>
-                            <option>TP.Hồ Chí Minh</option>
+                            <?php
+                            include("./connect.php");
+                            $result2 = $con->query("SELECT Address FROM `tours` GROUP by Address");
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                                echo "<option>$row2[Address]</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="search_content__item">
                         <div>Check-in</div>
-                        <input type="date" name="StartDate" type="text" class="search_content__input" placeholder="YYYY-MM-DD">
+                        <input type="date" value="<?php echo date("Y-m-d"); ?>" name="StartDate" type="text" class="search_content__input" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="search_content__item">
                         <div>Check-out</div>
@@ -72,13 +76,16 @@ include("./layout/header.php")
                     </div>
                    
                     <div class="search_content__item">
-                        <div>Rooms</div>
+                        <div>Rate</div>
                         <select name="type" class="search_content__input">
-                            <option>01</option>
-                            <option>02</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
                         </select>
                     </div>
-                    <button class="button search_content__button">Search<span></span><span></span><span></span>
+                    <button name="searchTour" class="button search_content__button">Search<span></span><span></span><span></span>
                     </button>
                 </form>
             </div>
